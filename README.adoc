@@ -8,22 +8,27 @@ Authors
  - Laetitia Giraldi 
  - Christophe Prud'homme
   
-The directories contain the supplementary material for the paper
+The directories contain the supplementary material to reproduce the results of the paper
 "Benchmarking rigid bodies moving in fluids using {feelpp}"
 
-The benchmarks can be run from a Linux Ubintu 20.04 system or with a docker container
+The benchmarks can be run from a Linux Ubintu 20.04 system or with a docker container.
+
+We used {feelpp} v109 which can be cited as follows
+++++
+Christophe Prud'homme, Vincent Chabannes, Thibaut Metivet, Romain Hild, Trophime, Abdoulaye SAMAKE, Thomas Saigre, Philippe Ricka, & Luca Berti. (2021). feelpp/feelpp: Feel++ V109 (v0.109.0). Zenodo. https://doi.org/10.5281/zenodo.5718297
+++++
 
 ## {feelpp} Installation
 
 ### Install {feelpp} in Ubuntu 20.04
 
-The installation procedure of {feelpp} is described here
+The installation procedure of {feelpp} is described https://docs.feelpp.org/user/0.109/install/index.html[here].
 
 ### Pull the docker container
 
 ## Run the benchmarks
 
-To run the benchmarks,
+To run the benchmarks using 4 mpi processes
 
 .Falling sphere in a  Stokes flow
 [source,sh]
