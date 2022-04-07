@@ -2,11 +2,12 @@
 = Benchmarking rigid bodies moving in fluids using {feelpp} Supplementary Material
 
 Authors
-- Luca Berti
-- Vincent Chabannes
-- Laetitia Giraldi 
-- Christophe Prud'homme
 
+ - Luca Berti
+ - Vincent Chabannes
+ - Laetitia Giraldi 
+ - Christophe Prud'homme
+  
 The directories contain the supplementary material for the paper
 "Benchmarking rigid bodies moving in fluids using {feelpp}"
 
