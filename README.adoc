@@ -47,23 +47,23 @@ To run the benchmarks using 4 mpi processes
 .Falling sphere in a  Stokes flow
 [source,sh]
 ----
-mpirun -np 4 feelpp_toolbox_fluid --case sphere
+mpirun -np 4 python3 fluid.py --case sphere
 ----
 
 .Falling 3D prolate ellipsoid in a  Stokes flow
 [source,sh]
 ----
-mpirun -np 4 feelpp_toolbox_fluid --case ellipsoid_3d
+mpirun -np 4 python3 fluid.py --case ellipsoid_3d
 ----
 
 .Falling 2d ellipsoid in a Laminar flow
 [source,sh]
 ----
-mpirun -np 4 feelpp_toolbox_fluid --case ellipsoid_2d
+mpirun -np 4 python3 fluid.py --case ellipsoid_2d
 ----
 
 .Falling 2d cylinder in a Laminar flow
 [source,sh]
 ----
-mpirun -np 4 feelpp_toolbox_fluid --case cylinder_2d
+mpirun -np 4 python3 fluid.py --case cylinder_2d
 ----
