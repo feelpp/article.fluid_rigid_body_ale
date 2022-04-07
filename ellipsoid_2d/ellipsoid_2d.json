@@ -24,9 +24,9 @@
     },
     "BoundaryConditions":
     {
-        "velocity":
+        "fluid":
         {
-            "Dirichlet":
+            "velocity":
             {
                 "Walls":
                 {
@@ -36,10 +36,7 @@
                 {
                     "expr":"{0,0}"
                 }
-            }
-        },
-        "fluid":
-        {
+            },        
             "outlet":
             {
                 "Top":
