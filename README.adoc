@@ -1,0 +1,36 @@
+:feelpp: Feel++
+= Benchmarking rigid bodies moving in fluids using {feelpp} Supplementary Material
+
+Authors
+- Luca Berti
+- Vincent Chabannes
+- Laetitia Giraldi 
+- Christophe Prud'homme
+
+The directories contain the supplementary material for the paper
+"Benchmarking rigid bodies moving in fluids using {feelpp}"
+
+The benchmarks can be run from a Linux Ubintu 20.04 system or with a docker container
+
+## {feelpp} Installation
+
+### Install {feelpp} in Ubuntu 20.04
+
+The installation procedure of {feelpp} is described here
+
+### Pull the docker container
+
+## Run the benchmarks
+
+To run the benchmarks,
+
+[source,sh]
+----
+# 3D 
+mpirun -np 4 feelpp_toolbox_fluid --case sphere
+mpirun -np 4 feelpp_toolbox_fluid --case ellipsoid_3d
+
+# 2D
+mpirun -np 4 feelpp_toolbox_fluid --case ellipsoid_2d
+mpirun -np 4 feelpp_toolbox_fluid --case cylinder_2d
+----
