@@ -1,0 +1,79 @@
+{
+    "Name": "Falling cylinder confined",
+    "ShortName":"Falling cylinder confined",
+    "Models":
+    {
+        "equations":"Navier-Stokes", 
+        "gravity":
+        {
+            "enable":1,
+            "expr":"{0,-980}:t"
+        }
+    },
+    "Materials":
+    {
+        "Fluid":{
+            "markers":"Fluid",
+            "physics":"fluid",
+            "rho":"1",
+            "mu":"0.1" 
+        },
+        "MySolid":{
+            "markers":"CylinderVolume",
+            "physics":"body",
+            "rho":"1.25"
+        }
+    },
+    "Parameters":
+    {
+
+    },
+    "BoundaryConditions":
+    {
+        "fluid":
+        {
+            "velocity":
+            {
+                "Walls":
+                {
+                    "expr":"{0,0}"
+                },
+                "Bottom":
+                {
+                    "expr":"{0,0}"
+                }
+            },        
+            "output":
+            {
+                "Top":
+                {
+                    "expr":"{0,0}" 
+                }
+            },
+            "body":
+            {
+                "p1_mark":
+                {
+                    "markers":"CylinderSurface",
+                    "materials":"MySolid"
+                }
+            }
+        }
+    },
+    "PostProcess":
+    {
+        "Exports":
+        {
+            "fields":["velocity","pressure","pid","displacement"]
+        },
+        "Measures":
+        {
+            "Quantities":
+            {
+                "names":"all"
+            }
+        }
+    }
+
+}
+
