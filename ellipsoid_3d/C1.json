@@ -69,15 +69,15 @@
                 "Bottom":
                 {
                     "expr":"{0,0,0}"
-                },
-                "SideCylinder":
-                {
-                    "expr":"{0,0,0}"
                 }
             },
-            "outlet":
+            "normal_stress":
             {
-                "Top":{"expr":0}
+                "Top":{"expr":0},
+                "SideCylinder":
+                {
+                    "expr":0
+                }
             },
             "body":
             {
