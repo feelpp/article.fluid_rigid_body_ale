@@ -67,7 +67,7 @@ mpirun -np 4 feelpp_toolbox_fluid --case sphere
 .Falling 3D prolate ellipsoid in a  Stokes flow
 [source,sh]
 ----
-mpirun -np 4 feelpp_toolbox_fluid --case ellipsoid_3d
+mpirun -np 4 feelpp_toolbox_fluid --config-files ellipsoid_3d/dev/C1.cfg ellipsoid_3d/dev/pcd.cfg 
 ----
 
 .Falling 2d ellipsoid in a Laminar flow
