@@ -24,20 +24,20 @@ The development version v110 can be used as well.
 
 ### Install {feelpp} in Ubuntu 20.04
 
-The installation procedure of {feelpp} is described https://docs.feelpp.org/user/0.109/install/index.html[here].
+The installation procedure of {feelpp} is described https://docs.feelpp.org/user/latest/install/index.html[here].
 
 ### Pull the docker container
 
 .Pull the docker image
 [source,sh]
 ----
-docker pull ghcr.io/feelpp/feelpp:v0.110.0-alpha.3-focal
+docker pull ghcr.io/feelpp/feelpp:focal
 ----
 
 .Run the docker image
 [source,sh]
 ----
-docker run --rm -it ghcr.io/feelpp/feelpp:v0.110.0-alpha.3-focal
+docker run --rm -it ghcr.io/feelpp/feelpp:focal
 ----
 
 ## Run the benchmarks
