@@ -61,7 +61,7 @@ To run the benchmarks using 4 mpi processes
 .Falling sphere in a  Stokes flow
 [source,sh]
 ----
-mpirun -np 4 feelpp_toolbox_fluit --case sphere
+mpirun -np 4 feelpp_toolbox_fluid --case sphere
 ----
 
 .Falling 3D prolate ellipsoid in a  Stokes flow
