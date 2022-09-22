@@ -3,12 +3,21 @@
     "ShortName":"Falling ellipse",
     "Models":
     {
-        "equations":"Navier-Stokes", 
-        "gravity":
+        "fluid":
         {
-            "enable":1,
-            "expr":"{0,-981}:t"
-        }
+            "materials":"Fluid",
+            "setup":{
+                "equations":"Navier-Stokes",
+                "gravity":
+                {
+                    "enable":1,
+                    "expr":"{0,-981}"
+                }
+            }
+        },
+        "body":{
+            "materials":["EllipseVolume"]
+        }          
     },
     "Materials":
     {
@@ -20,6 +29,28 @@
         "EllipseVolume":{
             "physics":"body",
             "rho":1.1
+        }
+    },
+    "Meshes":
+    {
+        "fluid":
+        {
+            "Import":
+            {
+                "filename":"$cfgdir/ellipsoid_2d.geo"
+            },
+            "MeshMotion":
+            {
+                "ComputationalDomain":
+                {
+                    "markers":"Fluid",
+                    "method":"harmonic_extension"
+                },
+                "Displacement":
+                {
+                    "Zero":["Top","Bottom","Walls"]
+                }
+            }
         }
     },
     "BoundaryConditions":
@@ -59,15 +90,17 @@
     },
     "PostProcess":
     {
-        "Exports":
-        {
-            "fields":["velocity","pressure","pid","displacement"]
-        },
-        "Measures":
-        {
-            "Quantities":
+        "fluid":{
+            "Exports":
             {
-                "names":"all"
+                "fields":["velocity","pressure","pid","displacement"]
+            },
+            "Measures":
+            {
+                "Quantities":
+                {
+                    "names":"all"
+                }
             }
         }
     }

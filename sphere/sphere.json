@@ -3,7 +3,21 @@
 "ShortName":"FallingSphere",
 "Models":
 {
-    "equations":"Navier-Stokes"
+    "fluid":
+    {
+        "materials":"Fluid",
+        "setup":{
+            "equations":"Stokes",
+            "gravity":
+            {
+                "enable":1,
+                "expr":"{-9.81,0,0}"
+            }
+        }
+    },
+    "body":{
+        "materials":["Solid"]
+    }
 },
 "Parameters":
 {
@@ -13,13 +27,24 @@
     "Fluid":{
         "markers":["Fluid"],
         "physics":"fluid",
-        "rho":"1e-6", //Reynolds number  All the mesh units are in micrometers; as a result I put these constants in micrometers too
-        "mu":"1"     // I use also micrograms -> density [micrograms/(micrometer)^3; mu [micrograms/(micrometers*second)]
+        "rho":"1e-6", 
+        "mu":"1"    
     },
     "Solid":{
         "markers":"SphereVol",
         "physics":"body",
         "rho":"1e-3"
+    }
+},
+"Meshes":
+{
+    "fluid":
+    {
+        "Import":
+        {
+            "filename":"$cfgdir/sphere.geo"
+        
+        }
     }
 },
 "BoundaryConditions":
@@ -30,13 +55,11 @@
         {
             "Walls":
             {
-                "expr":"{0,0,0}"
-                //"alemesh_bc":"fixed"
+                "expr":"{0,0,0}"                
             },
             "Outlet":
             {
                 "expr":"{0,0,0}"
-                //"alemesh_bc":"moving"
             }
 
         },
@@ -57,14 +80,15 @@
 },
 "PostProcess":
 {
-    "Exports":
-    {
-        "fields":["velocity","pressure","pid","displacement"] // the parameter bdrydisp is a customfield to be imposed on
-        // the boundary of the swimmer to project the displacement from ODE
-    },
-    "Measures":
-    {
-        "Forces":"Sphere"
+    "fluid":{
+        "Exports":
+        {
+            "fields":["velocity","pressure","pid","displacement"] 
+        },
+        "Measures":
+        {
+            "Forces":"Sphere"
+        }
     }
 }
 

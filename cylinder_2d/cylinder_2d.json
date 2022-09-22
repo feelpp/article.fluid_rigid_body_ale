@@ -3,12 +3,21 @@
     "ShortName":"Falling cylinder confined",
     "Models":
     {
-        "equations":"Navier-Stokes", 
-        "gravity":
+        "fluid":
         {
-            "enable":1,
-            "expr":"{0,-980}:t"
-        }
+            "materials":"Fluid",
+            "setup":{
+                "equations":"Navier-Stokes",
+                "gravity":
+                {
+                    "enable":1,
+                    "expr":"{0,-980}"
+                }
+            }
+        },
+        "body":{
+            "materials":["MySolid"]
+        }        
     },
     "Materials":
     {
@@ -28,6 +37,28 @@
     {
 
     },
+    "Meshes":
+    {
+        "fluid":
+        {
+            "Import":
+            {
+                "filename":"$cfgdir/cylinder_2d.geo"
+            },
+            "MeshMotion":
+            {
+                "ComputationalDomain":
+                {
+                    "markers":"Fluid",
+                    "method":"harmonic_extension"
+                },
+                "Displacement":
+                {
+                    "Zero":["Top","Bottom","Walls"]
+                }
+            }
+        }
+    },
     "BoundaryConditions":
     {
         "fluid":
@@ -43,7 +74,7 @@
                     "expr":"{0,0}"
                 }
             },        
-            "output":
+            "outlet":
             {
                 "Top":
                 {
@@ -55,22 +86,27 @@
                 "p1_mark":
                 {
                     "markers":"CylinderSurface",
-                    "materials":"MySolid"
+                    "materials":{
+                        "names":"MySolid"
+                    }
                 }
             }
         }
     },
     "PostProcess":
     {
-        "Exports":
+        "fluid":
         {
-            "fields":["velocity","pressure","pid","displacement"]
-        },
-        "Measures":
-        {
-            "Quantities":
+            "Exports":
             {
-                "names":"all"
+                "fields":["velocity","pressure","pid","displacement"]
+            },
+            "Measures":
+            {
+                "Quantities":
+                {
+                    "names":"all"
+                }
             }
         }
     }

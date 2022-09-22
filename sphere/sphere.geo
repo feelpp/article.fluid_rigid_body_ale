@@ -1,6 +1,6 @@
 
 RSphere = 0.1;
-lcSphere =0.0125;
+lcSphere =0.0125;// 0.001 0.005, 0.0125
 RDom = 10;
 lcDom = 1.5;
 
