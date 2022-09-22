@@ -11,7 +11,7 @@
                 "gravity":
                 {
                     "enable":1,
-                    "expr":"{0,0,Ug*Ug*d*d/((rho_tilde-1)*Vp)}:t:Ug:d:rho_tilde:Vp"
+                    "expr":"{0,0,-g}:g"//Ug*Ug*d*d/((rho_tilde-1)*Vp)}:t:Ug:d:rho_tilde:Vp"
                 }
             }
         },
@@ -45,10 +45,10 @@
     {
         "Fluid":{
             "rho":"1",
-            "mu":"0.1"
+            "mu":"Ug*d*materials_Fluid_rho/Ga:Ga:materials_Fluid_rho:d:Ug"
         },
         "ParticleVolume":{
-            "rho":"2.14" // rho_p/rho_f = 2.1
+            "rho":"materials_Fluid_rho*rho_tilde:materials_Fluid_rho:rho_tilde" // rho_p/rho_f = 2.1
         }
     },
     "Parameters":
@@ -56,9 +56,10 @@
         "chi":1.5,
         "d":1,
         "Ga":150,
-        "Vp":"3.1415*d*d*d/(6*chi):d:chi",
-        "Ug":"Ga*materials_Fluid_mu/(materials_Fluid_rho*d):Ga:d:materials_Fluid_mu:materials_Fluid_rho",
-        "rho_tilde":"materials_ParticleVolume_rho/materials_Fluid_rho:materials_Fluid_rho:materials_ParticleVolume_rho"
+        "Ug":1,//"sqrt((rho_tilde-1)*g*Vp/(d*d)):d:Vp:g:rho_tilde",
+        "g":"Ug*Ug*d*d/(Vp*(rho_tilde-1)):Ug:d:Vp:rho_tilde",//100,        
+        "Vp":"3.1415*d*d*d/(6*chi):d:chi",        
+        "rho_tilde":2.14//"materials_ParticleVolume_rho/materials_Fluid_rho:materials_Fluid_rho:materials_ParticleVolume_rho"
     },
     "BoundaryConditions":
     {
@@ -88,7 +89,7 @@
                     "materials":
                     {
                         "names":["ParticleVolume"]
-                    }
+                    }                    
                 }
             }
         }
@@ -99,15 +100,7 @@
         {
             "Exports":
             {
-                "fields":["velocity","pressure","pid","displacement"]/*,
-                "expr":{
-                    "U":"{fluid_body_ParticleSurf_V_0,fluid_body_ParticleSurf_V_1,flufluid_body_ParticleSurf_V_2}:fluid_body_ParticleSurf_V_0:fluid_body_ParticleSurf_V_1:fluid_body_ParticleSurf_V_2"
-                    /*"ur":"[fluid_Ux-fluid_body_CircleCenter_V_0,fluid_Uy-fluid_body_CircleCenter_V_1,fluid_Uz-fluid_body_CircleCenter_V_2]:fluid_Ux:fluid_Uy:fluid_Uz:fluid_body_CircleCenter_V_0,fluid_body_CircleCenter_V_1,fluid_body_CircleCenter_V_2",
-                    "ur_parall":"-ur/Ug:ur:Ug",
-                    "Re_parall":"sqrt(fluid_body_CircleCenter_V_0^2+fluid_body_CircleCenter_V_1^2+fluid_body_CircleCenter_V_2^2)*Ga/Ug:Ug:Ga:fluid_body_CircleCenter_V_0:fluid_body_CircleCenter_V_1:fluid_body_CircleCenter_V_2",
-                    "uPV":"fluid_body_CircleCenter_V_2/Ug:fluid_body_CircleCenter_V_2:Ug",
-                    "uPH":"{,,0}"
-                }*/
+                "fields":["velocity","pressure","pid","displacement"]
             },
             "Measures":
             {                

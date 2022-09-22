@@ -8,11 +8,14 @@ Cylinder(2) = {0, 0, 0, 0, 0, 1, 2.67*d, 2*Pi};
 Dilate {{0, 0, 5*14*d}, {1, 1, d/1.5}} {
   Volume{1}; 
 }
-Rotate {{0, 1, 0}, {0, 0, 5*14*d}, Pi/4} {
+Rotate {{0, 1, 0}, {0, 0, 5*14*d}, -Pi/16} {
   Volume{1}; 
 }
 
-Dilate {{0, 0, 0}, {1, 1, 5*15*d}} {
+//Dilate {{0, 0, 0}, {1, 1, 5*15*d}} {
+//  Volume{2}; 
+//}
+Dilate {{0, 0, 0}, {2, 2, 5*15*d}} {
   Volume{2}; 
 }
 Physical Surface("Top") = {7};

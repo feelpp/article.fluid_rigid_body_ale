@@ -28,7 +28,7 @@
                     "required_markers":["ParticleSurf","Top","Bottom","SideCylinder","ParticleVolume"],
                     "events":{
                         "each_time_step":{
-                            "frequency":10
+                            "frequency":5
                         }
                     }
                 }]
