@@ -11,22 +11,26 @@ Authors
 The directories contain the supplementary material to reproduce the results of the paper
 "Benchmarking rigid bodies moving in fluids using {feelpp}"
 
-The benchmarks can be run from a Linux Ubintu 20.04 system or with a docker container.
+The benchmarks can be run from a Linux Ubuntu 20.04(focal) or 22.04(jammy) system or with a docker container.
 
-We used {feelpp} v109 which can be cited as follows
+We used {feelpp} v110 which can be cited as follows
 ++++
 Christophe Prud'homme, Vincent Chabannes, Thibaut Metivet, Romain Hild, Trophime, Abdoulaye SAMAKE, Thomas Saigre, Philippe Ricka, & Luca Berti. (2021). feelpp/feelpp: Feel++ V109 (v0.109.0). Zenodo. https://doi.org/10.5281/zenodo.5718297
 ++++
 
 The development version v110 can be used as well.
 
-## {feelpp} Installation
+== {feelpp} Installation
 
-### Install {feelpp} in Ubuntu 20.04
+=== Install {feelpp} in Ubuntu 20.04 or 22.04
 
 The installation procedure of {feelpp} is described https://docs.feelpp.org/user/latest/install/index.html[here].
 
-### Pull the docker container
+=== Install Dockler if needed
+
+See https://docs.docker.com/engine/install/ for the procedure
+
+=== Pull the docker container
 
 .Pull the docker image
 [source,sh]
@@ -34,36 +38,46 @@ The installation procedure of {feelpp} is described https://docs.feelpp.org/user
 docker pull ghcr.io/feelpp/feelpp:focal
 ----
 
-.Run the docker image
-[source,sh]
-----
-docker run --rm -it ghcr.io/feelpp/feelpp:focal
-----
+== Run the benchmarks
 
-## Run the benchmarks
+First clone the article complementary material
+
+.Clone complementary material
+ $ git clone https://github.com/feelpp/article.fluid_rigid_body_ale
+ $ cd article.fluid_rigid_body_ale
+
+If you want to use docker, run the following that will mount the current directory of the top level folder of the article
+
+ $ docker run --rm -it -v $PWD:/mnt ghcr.io/feelpp/feelpp:focal
+
+You then have a prompt from docker ubuntu focal 
+
+ feelpp@dda2cfdd6120:/$ ls /mnt
+ README.adoc  cylinder_2d  ellipsoid_2d  ellipsoid_3d  fluid.py  sphere
+ feelpp@dda2cfdd6120:/$  cd /mnt
 
 To run the benchmarks using 4 mpi processes
 
 .Falling sphere in a  Stokes flow
 [source,sh]
 ----
-mpirun -np 4 python3 fluid.py --case sphere
+mpirun -np 4 feelpp_toolbox_fluit --case sphere
 ----
 
 .Falling 3D prolate ellipsoid in a  Stokes flow
 [source,sh]
 ----
-mpirun -np 4 python3 fluid.py --case ellipsoid_3d
+mpirun -np 4 feelpp_toolbox_fluid --case ellipsoid_3d
 ----
 
 .Falling 2d ellipsoid in a Laminar flow
 [source,sh]
 ----
-mpirun -np 4 python3 fluid.py --case ellipsoid_2d
+mpirun -np 4 feelpp_toolbox_fluid --case ellipsoid_2d
 ----
 
 .Falling 2d cylinder in a Laminar flow
 [source,sh]
 ----
-mpirun -np 4 python3 fluid.py --case cylinder_2d
+mpirun -np 4 feelpp_toolbox_fluid --case cylinder_2d
 ----
