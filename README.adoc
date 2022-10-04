@@ -81,3 +81,75 @@ mpirun -np 4 feelpp_toolbox_fluid --case ellipsoid_2d
 ----
 mpirun -np 4 feelpp_toolbox_fluid --case cylinder_2d
 ----
+
+== Reproduction of paper results
+
+All information of a simulation are stored in a directory whose path is given at the end of the execution. 
+Considering the terminal at the end of the simulation of the cylinder:
+
+[source]
+----
++---------------------------------------------------------------------------------------+
+|                                   application_fluid                                   |
++---------------------------------------------------------------------------------------+
+| +-------------+---------------------------------------------------------------------+ |
+| | logs        | /home/feelpp/feelppdb/toolboxes/fluid/cylinder_2d/np_4/logs         | |
+| +-------------+---------------------------------------------------------------------+ |
+| | journal     | /home/feelpp/feelppdb/toolboxes/fluid/cylinder_2d/np_4/journal.json | |
+| +-------------+---------------------------------------------------------------------+ |
+| | directories | +--------------------------------------------------------+          | |
+| |             | | /home/feelpp/feelppdb/toolboxes/fluid/cylinder_2d/np_4 |          | |
+| |             | +--------------------------------------------------------+          | |
+| |             | | /mnt                                                   |          | |
+| |             | +--------------------------------------------------------+          | |
+| +-------------+---------------------------------------------------------------------+ |
++---------------------------------------------------------------------------------------+
+----
+
+one can notice that the path of the directory is given by: /home/feelpp/feelppdb/toolboxes/fluid/cylinder_2d/np_4.
+
+The files used to reproduce the paper results are the folder labeled "fluid.exports" allowing to visualize the simulation using Paraview, and the "values.csv" file in the "fluid.measures" folder storing the results of the simulation in form of columns, i.e. each column stores the values of one quantity for each time instant.
+
+To read and store the quantities of the csv files, one uses the library Pandas of Python:
+
+[source]
+----
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Read and store csv
+data = pd.read_csv("values.csv") #Read csv file
+data.columns = data.columns.str.strip()
+
+xcm = np.array(data["Quantities_body_p1_mark.mass_center_0"])
+ycm = np.array(data["Quantities_body_p1_mark.mass_center_1"])
+rot = np.array(data["Quantities_body_p1_mark.rigid_rotation_angle"])
+time = np.array(data["time"])
+----
+
+The last four lines store the quantities of interest using the column name. For the graphs shown in the paper, one requires the following quantities:
+
+ - mass_center_0: x-coordinate of the center of mass
+ 
+ - mass_center_1: y-coordinate of the center of mass in 2d and z-coordinate in 3d
+ 
+ - rigid_rotation_angle: rotation angle
+ 
+ - time: time instant
+ 
+The name of each column is defined by the name of the quantity, followed by the name given to the body. For the previous example, the name given to the body is Quantities_body_p1_mark. 
+
+Finally, one can plot the quantities. The following code allows plotting the graphs by defining x, y and the labels: 
+
+[source]
+----
+# Plot results
+figure, axis = plt.subplots(figsize=(15,10)) 
+axis.plot(time,ycm,label="Paper results") # Plot y=ycm versus x=time
+axis.set_xlabel("Time") # Define x label
+axis.set_ylabel("ycm") # Define y label
+axis.legend(loc='best')
+----
+
+This example shows the evolution of the y-coordinate of the cylinder center of mass versus time.
