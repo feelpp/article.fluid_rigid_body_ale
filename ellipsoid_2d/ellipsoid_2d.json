@@ -37,7 +37,8 @@
         {
             "Import":
             {
-                "filename":"$cfgdir/ellipsoid_2d.geo"
+                "filename":"$cfgdir/ellipsoid_2d.geo",
+                "hsize":0.009
             },
             "MeshMotion":
             {
