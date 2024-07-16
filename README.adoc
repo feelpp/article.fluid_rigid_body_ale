@@ -9,7 +9,7 @@ Authors
  - Christophe Prud'homme
   
 The directories contain the supplementary material to reproduce the results of the paper
-"Benchmarking rigid bodies moving in fluids using {feelpp}"
+"Benchmarking rigid bodies moving in fluids using {feelpp}", see https://hal.science/hal-03835136 
 
 The benchmarks can be run from a Linux Ubuntu 20.04(focal) or 22.04(jammy) system or with a docker container.
 
